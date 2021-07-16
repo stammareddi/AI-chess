@@ -1,0 +1,33 @@
+.move-history {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.float-child {
+  width: 50%;
+}
+
+.board {
+  width: 500px;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.info {
+  width: 500px;
+  margin: auto;
+}
+#main {
+  display: flex;
+}
+
+#float-child:first-child {
+  width: 50%;
+}
+.boardd {
+  width: 50%;
+}
+
+h4 {
+  margin: 2% auto;
+}

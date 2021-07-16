@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+        integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+        crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
+    <div id="main">
+
+        <div id="float-child">
+
+
+            <h4>Board representation</h4>
+            <span> Chessboard is represented as a 8*8 matrix. Creating and visualizing the board was done using
+                <a href="https://chessboardjs.com/index.html">chessboard.js</a>. The rules for each piece and move
+                generation was done using the
+                <a href="https://github.com/jhlywa/chess.js">chess.js</a> library.
+                Using these helped me focus more on the AI part rather than worrying about move generation and
+                visualization.
+
+
+            </span>
+
+
+
+            <h4> Position evaluation</h4>
+            <span>The AI needs a way to determine which is the best possible move to make at time t.To do this each
+                piece will be given a score</span>
+
+            <table border="1px">
+                <thead>
+                    <tr>
+                        <th>Pieces</th>
+                        <th> White</th>
+                        <th>Black</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pond</td>
+                        <td>+10</td>
+                        <td>-10</td>
+                    </tr>
+                    <tr>
+                        <td>Knight</td>
+                        <td>+30</td>
+                        <td>-30</td>
+                    </tr>
+                    <tr>
+                        <td>Bishop</td>
+                        <td>+30</td>
+                        <td>-30</td>
+                    </tr>
+                    <tr>
+                        <td>Rook</td>
+                        <td>+50</td>
+                        <td>-50</td>
+                    </tr>
+                    <tr>
+                        <td>Queen</td>
+                        <td>+90</td>
+                        <td>-90</td>
+                    </tr>
+                    <tr>
+                        <td>King</td>
+                        <td>+900</td>
+                        <td>-900</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h4>Minimax algorithm</h4>
+            <span>
+                This recursive algorithm(AI) attempts to minimize its score while the player try to maximize their score
+                based on
+                the
+                position evaluation. All possible moves are examined based on the search depth and the static board
+                evaluation is used to determine the score at the leafs of the search tree. From there the scores goes up
+                the
+                tree which then are used to select the most optimal move at each depth. Note the effectiveness of the
+                minimax
+                algorithm heavily depends on the search depth, a higher search depth means a long process time needed to
+                evaluate that many positions.
+
+
+            </span>
+
+            <h4>Improving efficiency of minimax algorithm using alpha-beta pruning
+            </h4>
+            <span>
+                Alpha-beta pruning is an optimization method for the minimax algorithm in a way that allows it to
+                disregard
+                some branches in the search tree. Doing this will result in the same outcome as doing a full search the
+                only
+                difference is it will be much faster when used.Throughout the depths the algorithm will keep track of
+                the
+                worst and
+                best moves for each player thus far and completely avoid searching branches that are guaranteed to
+                return
+                worse results than the best and worst moves.
+
+            </span>
+
+        </div>
+
+
+        <div id="float-child" class="boardd">
+            <div id="board" class="board"></div>
+            <div class="info">
+                Search depth:
+                <select id="search-depth">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+
+                </select>
+
+                <br>
+                <span>Positions evaluated: <span id="position-count"></span></span>
+                <br>
+                <span>Time: <span id="time"></span></span>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="chess.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
